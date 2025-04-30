@@ -12,6 +12,9 @@ cable_data = {
     "16": {"resistance": 1.15, "rating": 76},
     "25": {"resistance": 0.727, "rating": 101},
     "35": {"resistance": 0.524, "rating": 125},
+    "50": {"resistance": 0.398, "rating": 165},
+    "70": {"resistance": 0.283, "rating": 210},
+    "95": {"resistance": 0.205, "rating": 265},
 }
 
 # ---- Streamlit UI ----
@@ -60,7 +63,7 @@ if st.button("Calculate"):
     if selected_size:
         st.success(f"✨ CableGenie Suggests: {selected_size} mm²")
     else:
-        st.error("No suitable cable size found within voltage drop and current limits.")
+        st.error("No suitable cable size found within voltage drop and current limits. Try increasing the voltage drop limit or use larger cables.")
 
     df = pd.DataFrame(results)
     st.dataframe(df)
