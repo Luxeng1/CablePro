@@ -2,7 +2,7 @@ import math
 import pandas as pd
 import streamlit as st
 
-# ---- Cable Properties (Copper only for now) ----
+# ---- Cable Properties (Copper only) ----
 cable_data = {
     "1.5": {"resistance": 12.1, "rating": 18},
     "2.5": {"resistance": 7.41, "rating": 24},
@@ -22,11 +22,10 @@ st.title("CableGenie: Street Lighting Cable Sizing Tool")
 st.write("🔌 Smart cable sizing for street lighting – powered by CableGenie.")
 
 voltage = st.selectbox("System Voltage (V)", [230, 400])
-load_per_pole = st.number_input("Load per Pole (Watts)", min_value=1.0)
+load_per_pole = st.number_input("Load per Pole (Watts)", min_value=200, max_value=270)
 number_of_poles = st.number_input("Number of Poles", min_value=1, step=1)
 pole_spacing = st.number_input("Pole Spacing (meters)", min_value=1.0)
 power_factor = st.slider("Power Factor", 0.1, 1.0, 0.9)
-cable_material = st.selectbox("Cable Material", ['copper', 'aluminum'])
 voltage_drop_limit_percent = st.slider("Allowable Voltage Drop (%)", 1.0, 10.0, 5.0)
 
 if st.button("Calculate"):
@@ -63,7 +62,7 @@ if st.button("Calculate"):
     if selected_size:
         st.success(f"✨ CableGenie Suggests: {selected_size} mm²")
     else:
-        st.error("No suitable cable size found within voltage drop and current limits. Try increasing the voltage drop limit or use larger cables.")
+        st.error("No suitable cable size found within voltage drop and current limits.")
 
     df = pd.DataFrame(results)
     st.dataframe(df)
