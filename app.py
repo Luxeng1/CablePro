@@ -15,8 +15,8 @@ cable_data = {
 }
 
 # ---- Streamlit UI ----
-st.title("Street Lighting Cable Sizing Tool")
-st.write("Calculate suitable cable size and voltage drop for street lighting.")
+st.title("CableGenie: Street Lighting Cable Sizing Tool")
+st.write("🔌 Smart cable sizing for street lighting – powered by CableGenie.")
 
 voltage = st.selectbox("System Voltage (V)", [230, 400])
 load_per_pole = st.number_input("Load per Pole (Watts)", min_value=1.0)
@@ -52,13 +52,13 @@ if st.button("Calculate"):
         if is_suitable and not selected_size:
             selected_size = size
 
-    st.subheader("Sizing Summary")
+    st.subheader("🧠 Sizing Summary")
     st.write(f"**Total Load:** {total_load_watt:.2f} W")
     st.write(f"**Estimated Current:** {current:.2f} A")
     st.write(f"**Cable Length:** {cable_length:.2f} m")
 
     if selected_size:
-        st.success(f"Suggested Cable Size: {selected_size} mm²")
+        st.success(f"✨ CableGenie Suggests: {selected_size} mm²")
     else:
         st.error("No suitable cable size found within voltage drop and current limits.")
 
